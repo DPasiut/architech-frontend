@@ -2,7 +2,7 @@
 
 ### 1. Clone repository 
 
-### 2. Open termina in project root 
+### 2. Open terminal in project root 
 
 ### 3. Enter ```npm install``` 
 
