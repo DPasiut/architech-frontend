@@ -7,7 +7,7 @@ import {User} from "./model";
   providedIn: 'root'
 })
 
-export class Service {
+export class UserService {
   private static readonly APIURL: string = '/api/user/register';
 
   constructor(
@@ -20,7 +20,7 @@ export class Service {
       login: user.login,
       password: user.password
     }
-    return this.http.post<void>(Service.APIURL, body);
+    return this.http.post<void>(UserService.APIURL, body);
   }
 
 }

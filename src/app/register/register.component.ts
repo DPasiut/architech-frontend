@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Service} from "../service";
+import {UserService} from "../userService";
 import {User} from "../model";
 
 @Component({
@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
 
   constructor(
-    private service: Service
+    private service: UserService
   ) {
   }
 
