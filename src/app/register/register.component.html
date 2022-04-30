@@ -7,22 +7,48 @@
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-              <form>
+              <form #userRegistrationForm="ngForm">
                 <div class="form-outline mb-4">
-                  <input type="text" id="login" class="form-control form-control-lg" name="login"
-                         placeholder="Enter Login" [(ngModel)]="login"/>
 
                   <label class="form-label" for="login">Login</label>
+                  <input type="text" id="login" class="form-control form-control-lg" name="login" #Login="ngModel"
+                         placeholder="Enter Login" [(ngModel)]="user.login" required minlength="5"
+                         [pattern]="loginPattern"/>
+                  <div *ngIf="Login.invalid && (Login.dirty || Login.touched)" class="alert">
+                    <div *ngIf="Login.errors?.['required']">
+                      Login is required.
+                    </div>
+                    <div *ngIf="Login.errors?.['minlength']">
+                      Login must contain least 5 characters long.
+                    </div>
+                    <div *ngIf="Login.errors?.['pattern']">
+                      Login must contain alpha-numeric values only.
+                    </div>
+                  </div>
+
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="password" id="password" class="form-control form-control-lg" name="password"
-                  placeholder="Enter password" [(ngModel)]="password"/>
                   <label class="form-label" for="password">Password</label>
+                  <input type="password" id="password" class="form-control form-control-lg validate" name="Password"
+                         #Password="ngModel" required minlength="8"
+                         placeholder="Enter password" [(ngModel)]="user.password" [pattern]="passwordPattern"/>
+                  <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="alert">
+                    <div *ngIf="Password.errors?.['required']">
+                      Password is required.
+                    </div>
+                    <div *ngIf="Password.errors?.['minlength']">
+                      Password must be at least 8 characters long.
+                    </div>
+                    <div *ngIf="Password.errors?.['pattern']">
+                      Password must contain at least 1 number, 1 uppercase, and 1 lowercase character
+                    </div>
+                  </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button type="button"
-                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                          (click)="onSubmit()">Register</button>
+                  <button [disabled]="!userRegistrationForm.valid" type="button"
+                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="onSubmit()">
+                    Register
+                  </button>
                 </div>
 
               </form>

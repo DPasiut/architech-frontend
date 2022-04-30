@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
 import {Service} from "../service";
 import {User} from "../model";
-import {NgForm} from "@angular/forms";
-import {catchError} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -12,30 +9,33 @@ import {catchError} from "rxjs";
 })
 export class RegisterComponent implements OnInit {
 
-  login!: string;
-  password!: string;
+  user!: User;
+  loginPattern = "[0-9a-zA-Z]{5,}";
+  passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
 
   constructor(
-    private service: Service,
-    // private toastr: ToastrService
+    private service: Service
   ) {
   }
 
   ngOnInit() {
+    this.user = {
+      login: '',
+      password: ''
+    }
   }
 
   onSubmit() {
     this.service.registerUser({
-      login: this.login,
-      password: this.password
+      login: this.user.login,
+      password: this.user.password
     }).subscribe({
-      next(val) {
-        console.log("Success");
+      next() {
+        alert("Register success");
       },
       error(val) {
-        console.log(val.error.error);
+        alert(val.error.error);
       }
     })
-    console.log("submit end");
   }
 }
