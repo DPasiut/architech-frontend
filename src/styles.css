@@ -1,5 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-input.ng-invalid.ng-dirty{
+inputinput.ng-invalid.ng-dirty{
   border-bottom-color: #e91e63 !important;
   box-shadow: #e91e63 !important;
 }

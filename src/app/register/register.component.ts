@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../userService";
 import {User} from "../model";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
   passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
 
   constructor(
-    private service: UserService
+    private service: UserService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -26,15 +28,16 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    const that = this;
     this.service.registerUser({
       login: this.user.login,
       password: this.user.password
     }).subscribe({
       next() {
-        alert("Register success");
+        that.toastr.success("Success");
       },
       error(val) {
-        alert(val.error.error);
+        that.toastr.error(val.error.error);
       }
     })
   }
